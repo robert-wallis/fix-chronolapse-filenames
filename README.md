@@ -31,6 +31,8 @@ after
     ./screen_9.jpg
     ./screen_10.jpg
     ./screen_11.jpg
+    
+Screencaps taken, and renamed by this script, while this script was being written: http://www.youtube.com/watch?v=OHQ7uBithf4
 
 Usage
 =====
