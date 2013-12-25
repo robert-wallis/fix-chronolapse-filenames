@@ -37,6 +37,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 import os
 import re
+import math
 
 def main():
     "run from double click / command line"
@@ -44,6 +45,7 @@ def main():
     i = find_max(path) + 1
     for filename in os.listdir(path):
         i = rename(path, filename, i)
+    pad_digits(path)
 
 def rename(path, filename, i):
     """rename the file sequentially for AE,\
@@ -65,12 +67,16 @@ def find_max(path):
             i = max(i, int(match.groups()[1]))
     return i
 
-def fix_current(path):
-    "fix my messed up attempts at renaming"
+def pad_digits(path):
+    "prepend 0 to frame numbers so AE doesn't get confused"
+    max_i = find_max(path)
+    digits = math.floor(math.log(max_i, 10)) + 1
     for filename in os.listdir(path):
-        match = re.match(r'(screen_)(\d+)(\.jpg)', filename)
-        if match:
-            os.rename(path + filename, path + filename[0:-4] + '.1.jpg')
-
+        match = re.match(r'(screen_)(\d{1,' + str(digits - 1) +'})(\.jpg)', filename)
+        if None == match:
+            continue
+        number = match.group(2).zfill(digits)
+        os.rename(path + filename, path + match.group(1) + number + match.group(3)) 
+            
 if __name__ == '__main__':
     main()
