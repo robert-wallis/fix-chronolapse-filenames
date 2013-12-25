@@ -20,15 +20,15 @@ before
     
 after
 
-    ./screen_1.jpg
-    ./screen_2.jpg
-    ./screen_3.jpg
-    ./screen_4.jpg
-    ./screen_5.jpg
-    ./screen_6.jpg
-    ./screen_7.jpg
-    ./screen_8.jpg
-    ./screen_9.jpg
+    ./screen_01.jpg
+    ./screen_02.jpg
+    ./screen_03.jpg
+    ./screen_04.jpg
+    ./screen_05.jpg
+    ./screen_06.jpg
+    ./screen_07.jpg
+    ./screen_08.jpg
+    ./screen_09.jpg
     ./screen_10.jpg
     ./screen_11.jpg
     
