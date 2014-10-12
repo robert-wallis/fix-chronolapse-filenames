@@ -50,9 +50,9 @@ def main():
 def rename(path, filename, i):
     """rename the file sequentially for AE,\
     because it's dumb or chronolapse is dumb"""
-    match = re.match(r'(screen_).*\.\d+\.jpg', filename)
+    match = re.match(r'screen_.*\.\d+\.([a-z]{3})', filename)
     if match:
-        new_name = "screen_%d.jpg" % i
+        new_name = "screen_%d.%s" % (i, match.group(1))
         print("renaming " + path + filename + " to " + new_name)
         os.rename(path + filename, new_name)
         i += 1
@@ -62,7 +62,7 @@ def find_max(path):
     "find the highest int in the list"
     i = 0
     for filename in os.listdir(path):
-        match = re.match(r'(screen_)(\d+)(\.jpg)', filename)
+        match = re.match(r'(screen_)(\d+)(\.[a-z]{3})', filename)
         if match:
             i = max(i, int(match.groups()[1]))
     return i
@@ -72,7 +72,7 @@ def pad_digits(path):
     max_i = find_max(path)
     digits = math.floor(math.log(max_i, 10)) + 1
     for filename in os.listdir(path):
-        match = re.match(r'(screen_)(\d{1,' + str(digits - 1) +'})(\.jpg)', filename)
+        match = re.match(r'(screen_)(\d{1,' + str(digits - 1) +'})(\.[a-z]{3})', filename)
         if None == match:
             continue
         number = match.group(2).zfill(digits)
